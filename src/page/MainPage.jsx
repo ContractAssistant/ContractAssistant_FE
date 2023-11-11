@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import GptAnalytics from "../components/GptAnalytics";
 import ChatForm from "../components/ChatForm";
+import ListBar from "../components/ListBar";
+import LegalTerminology from "../components/LegalTerminology";
 
 const MainPage = () => {
   return (
     <GridContainer>
-      <LeftBar>sidebar</LeftBar>
+      <LeftBar>
+        <ListBar />
+      </LeftBar>
       <GridItem>
         <ChatForm />
       </GridItem>
@@ -13,7 +17,9 @@ const MainPage = () => {
         <RightBarTop>
           <GptAnalytics />
         </RightBarTop>
-        <RightBarBottom>Bottom</RightBarBottom>
+        <RightBarBottom>
+          <LegalTerminology />
+        </RightBarBottom>
       </RightBar>
     </GridContainer>
   );
@@ -21,10 +27,11 @@ const MainPage = () => {
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 2fr 4fr 3fr;
+  grid-template-columns: 1.5fr 5fr 4fr;
   grid-template-rows: 1fr;
-  width: 100vw;
-  height: 100vh;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
   background-color: white;
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -33,7 +40,7 @@ const GridContainer = styled.div`
 `;
 
 const GridItem = styled.div`
-  background-color: gray;
+  background-color: white;
   margin: 1px;
   @media (max-width: 768px) {
     grid-row: 2;
@@ -53,17 +60,21 @@ const RightBar = styled(GridItem)`
   @media (max-width: 768px) {
     grid-row: 3;
   }
+  padding-top: 1rem;
+  padding-right: 1rem;
 `;
 
 const RightBarTop = styled.div`
   flex: 1;
   height: 50%;
+  width: 100%;
   background-color: white;
 `;
 
 const RightBarBottom = styled.div`
   flex: 1;
   height: 50%;
-  background-color: lightgreen;
+  width: 100%;
+  background-color: white;
 `;
 export default MainPage;

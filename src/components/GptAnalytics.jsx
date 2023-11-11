@@ -77,13 +77,25 @@ const GptAnalytics = () => {
 
 export default GptAnalytics;
 
+// const Wrapper = styled.div`
+//   width: 100;
+//   height: 100%;
+//   padding: 1rem;
+//   border: 1px solid black;
+//   border-radius: 1rem;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+// `;
 const Wrapper = styled.div`
-  width: auto;
-  height: 90%;
-  margin: 1rem;
-  padding: 1rem;
-  border: 1px solid black;
-  border-radius: 1rem;
+  /* width: 462px;
+  height: 330px; */
+  width: 90%;
+  height: 80%;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #e4e4e7;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;

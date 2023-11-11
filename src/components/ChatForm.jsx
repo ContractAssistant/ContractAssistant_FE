@@ -6,20 +6,8 @@ const ChatForm = () => {
       <MainTitle>Chat</MainTitle>
       <FormWrapper action="" method="" autoComplete="off">
         <LabelWrapper>
-          <TypeForm
-            type="text"
-            name="type"
-            required
-            placeholder="Please enter the contract type"
-          />
-        </LabelWrapper>
-        <LabelWrapper>
-          <InputForm
-            type="text"
-            name="content"
-            required
-            placeholder="Please include all information relevant to your issue."
-          />
+          <TypeForm type="text" name="type" required placeholder="Please enter the contract type" />
+          <InputForm type="text" name="content" required placeholder="Please include all information relevant to your issue." />
         </LabelWrapper>
         <ButtonWrapper>
           <SubmitBtn type="submit" value="Submit" />
@@ -30,11 +18,14 @@ const ChatForm = () => {
 };
 
 const Wrapper = styled.div`
-  width: 476px;
-  height: 905px;
+  /* width: 476px;
+  height: 905px; */
+  width: 90%;
+  height: 91.5%;
   border: 1px solid #e4e4e7;
   border-radius: 10px;
-  padding: 45px 23px 23px 23px;
+  padding: 2rem;
+  margin-top: 1rem;
 `;
 
 const MainTitle = styled.h4`
@@ -45,17 +36,22 @@ const MainTitle = styled.h4`
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
+  height: 95%;
 `;
 
 const LabelWrapper = styled.label`
   display: flex;
   flex-direction: column;
-  margin: 0 autoo;
+  margin: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 const TypeForm = styled.input`
-  width: 470px;
-  height: 44px;
+  /* width: 470px; */
+  width: 100%;
+  /* height: 44px; */
+  height: 3rem;
   background-color: #ffffff;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
@@ -63,8 +59,9 @@ const TypeForm = styled.input`
 `;
 
 const InputForm = styled.textarea`
-  width: 470px;
-  height: 727px;
+  /* width: 470px; */
+  width: 100%;
+  height: 100%;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
   margin-bottom: 16px;
@@ -77,11 +74,13 @@ const ButtonWrapper = styled.div`
 `;
 
 const SubmitBtn = styled.input`
-    width: 102px;
-    height: 42px;
-    background-color: #000000;
-    color: #ffffff;
-    border-radius: 5px;
+  /* width: 102px;
+  height: 42px; */
+  width: 6rem;
+  height: 3rem;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 5px;
 `;
 
 export default ChatForm;
