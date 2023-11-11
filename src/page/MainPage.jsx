@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import GptAnalytics from "../components/GptAnalytics";
 
 const MainPage = () => {
   return (
@@ -6,7 +7,9 @@ const MainPage = () => {
       <LeftBar>sidebar</LeftBar>
       <GridItem>main</GridItem>
       <RightBar>
-        <RightBarTop>Top</RightBarTop>
+        <RightBarTop>
+          <GptAnalytics />
+        </RightBarTop>
         <RightBarBottom>Bottom</RightBarBottom>
       </RightBar>
     </GridContainer>
@@ -28,7 +31,6 @@ const GridContainer = styled.div`
 
 const GridItem = styled.div`
   background-color: gray;
-  border: 1px dotted black;
   margin: 1px;
   @media (max-width: 768px) {
     grid-row: 2;
@@ -53,7 +55,7 @@ const RightBar = styled(GridItem)`
 const RightBarTop = styled.div`
   flex: 1;
   height: 50%;
-  background-color: lightblue;
+  background-color: white;
 `;
 
 const RightBarBottom = styled.div`
