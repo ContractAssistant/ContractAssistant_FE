@@ -5,15 +5,20 @@ const MainPage = () => {
   return (
     <GridContainer>
       <LeftBar>sidebar</LeftBar>
-      <GridItem><ChatForm /></GridItem>
-      <RightBar>sidebar</RightBar>
+      <GridItem>
+        <ChatForm />
+      </GridItem>
+      <RightBar>
+        <RightBarTop>Top</RightBarTop>
+        <RightBarBottom>Bottom</RightBarBottom>
+      </RightBar>
     </GridContainer>
   );
 };
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 2fr 6fr 2fr;
+  grid-template-columns: 2fr 4fr 3fr;
   grid-template-rows: 1fr;
   width: 100vw;
   height: 100vh;
@@ -48,4 +53,15 @@ const RightBar = styled(GridItem)`
   }
 `;
 
+const RightBarTop = styled.div`
+  flex: 1;
+  height: 50%;
+  background-color: lightblue;
+`;
+
+const RightBarBottom = styled.div`
+  flex: 1;
+  height: 50%;
+  background-color: lightgreen;
+`;
 export default MainPage;
