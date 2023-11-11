@@ -49,22 +49,24 @@ const LabelWrapper = styled.label`
 
 const TypeForm = styled.input`
   /* width: 470px; */
-  width: 100%;
+  width: calc(100% - 2rem);
   /* height: 44px; */
-  height: 3rem;
+  height: 2rem;
   background-color: #ffffff;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
   margin-bottom: 30px;
+  padding: 1rem;
 `;
 
 const InputForm = styled.textarea`
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
   border: 1px solid #d7d7d7;
   border-radius: 10px;
   margin-bottom: 18px;
   resize: none;
+  padding: 1rem;
 `;
 
 const ButtonWrapper = styled.div`
