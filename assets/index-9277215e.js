@@ -133,7 +133,7 @@ Error generating stack: `+o.message+`
   /* width: 476px;
   height: 905px; */
   width: 90%;
-  height: 91.5%;
+  height: 93%;
   border: 1px solid #e4e4e7;
   border-radius: 10px;
   padding: 2rem;
@@ -144,7 +144,7 @@ Error generating stack: `+o.message+`
 `,a1=T.form`
   display: flex;
   flex-direction: column;
-  height: 95%;
+  height: 98%;
 `,c1=T.label`
   display: flex;
   flex-direction: column;
@@ -161,12 +161,11 @@ Error generating stack: `+o.message+`
   border-radius: 10px;
   margin-bottom: 30px;
 `,d1=T.textarea`
-  /* width: 470px; */
   width: 100%;
   height: 100%;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   resize: none;
 `,p1=T.div`
   display: flex;
@@ -232,7 +231,7 @@ Error generating stack: `+o.message+`
   &::-webkit-scrollbar-track {
     background-color: #f1f1f1; /* Color of scrollbar track */
   }
-`,Ba=[{id:"1",title:"임금(연봉)",content:"근로계약서에는 고용주와 근로자간 협의된 총 임금(연봉)이 반드시 표기되어 있어야 합니다. 기본급, 수당, 상여금 등 임금 구성항목과 임금 지급일, 지급 방법 등도 정해져 있어야 하고요! 임금 지급은 예금통장으로 지불받는 것이 좋습니다."},{id:"2",title:"소정 근로 시간&휴게 시간",content:"근로기준법에서는 휴게 시간 제외 근로시간을 주 40시간 이하로 규정하고 있어요. 특정한 사유가 있을 시에는 1일 최대 12시간, 주 최대 52시간까지 근로가 가능합니다."},{id:"3",title:"연차&휴가(무급/유급)",content:"2018년 6월 관련 법이 개정되면서 1년 미만 신입사원도 11일의 연차 휴가를 사용할 수 있게 되었습니다."}],_1=()=>{const[e,t]=R.useState(1),[n,r]=R.useState(0),l=1,o=e*l,i=o-l,u=Ba.slice(i,o),s=[];for(let p=1;p<=Math.ceil(Ba.length/l);p++)s.push(p);const a=Math.ceil(s.length/10),h=n*10,m=s.slice(h,h+10);return C.jsxs(N1,{children:[C.jsx(z1,{children:"Legal Terminology"}),C.jsx(R1,{children:"법률 용어 해석"}),C.jsx(T1,{children:u.map(p=>C.jsxs(L1,{children:[C.jsx(j1,{children:p.title}),C.jsx($1,{children:p.content})]},p.id))}),n>0&&C.jsx(Wa,{onClick:()=>r(n-1),children:"⬅️"}),m.map(p=>C.jsx(Od,{active:p===e,onClick:()=>t(p),children:p},p)),n<a-1&&C.jsx(Wa,{onClick:()=>r(n+1),children:"➡️"})]})},N1=T.div`
+`,Ba=[{id:"1",title:"임금(연봉)",content:"근로계약서에는 고용주와 근로자간 협의된 총 임금(연봉)이 반드시 표기되어 있어야 합니다. 기본급, 수당, 상여금 등 임금 구성항목과 임금 지급일, 지급 방법 등도 정해져 있어야 하고요! 임금 지급은 예금통장으로 지불받는 것이 좋습니다."},{id:"2",title:"소정 근로 시간&휴게 시간",content:"근로기준법에서는 휴게 시간 제외 근로시간을 주 40시간 이하로 규정하고 있어요. 특정한 사유가 있을 시에는 1일 최대 12시간, 주 최대 52시간까지 근로가 가능합니다."},{id:"3",title:"연차&휴가(무급/유급)",content:"2018년 6월 관련 법이 개정되면서 1년 미만 신입사원도 11일의 연차 휴가를 사용할 수 있게 되었습니다."},{id:"4",title:"상속",content:"상속은 죽은 사람으로부터 그의 재산, 채권, 부채 등의 권리와 의무를 그의 법정 상속인에게 이전하는 것을 말합니다. 상속은 법률에 따라 이뤄지며, 상속인은 상속에 따른 재산을 상속인 간 협의 또는 법정 분할에 따라 나눌 수 있습니다."},{id:"5",title:"계약 해지",content:"계약 해지는 어떤 계약이 정해진 기간 동안 유효하게 유지되지 않거나, 계약의 조건이 어기어졌을 때, 또는 당사자 중 하나가 계약을 위반했을 때 발생합니다. 계약 해지에는 서면 통지, 소송, 또는 양자 합의 등 다양한 방법이 포함될 수 있습니다."},{id:"6",title:"상표권",content:"상표권은 상표로 등록된 상표의 소유자에게 주어지는 권리를 의미합니다. 이 권리는 특정한 상표를 특정한 상품 또는 서비스에 사용할 수 있는 권리를 제공하며, 상표의 소유자는 다른 사람이 해당 상표를 무단으로 사용하는 것을 막을 수 있습니다."}],_1=()=>{const[e,t]=R.useState(1),[n,r]=R.useState(0),l=3,o=e*l,i=o-l,u=Ba.slice(i,o),s=[];for(let p=1;p<=Math.ceil(Ba.length/l);p++)s.push(p);const a=Math.ceil(s.length/10),h=n*10,m=s.slice(h,h+10);return C.jsxs(N1,{children:[C.jsx(z1,{children:"Legal Terminology"}),C.jsx(R1,{children:"법률 용어 해석"}),C.jsx(T1,{children:u.map(p=>C.jsxs(L1,{children:[C.jsx(j1,{children:p.title}),C.jsx($1,{children:p.content})]},p.id))}),C.jsxs(I1,{children:[n>0&&C.jsx(Wa,{onClick:()=>r(n-1),children:"⬅️"}),m.map(p=>C.jsx(Od,{active:p===e,onClick:()=>t(p),children:p},p)),n<a-1&&C.jsx(Wa,{onClick:()=>r(n+1),children:"➡️"})]})]})},N1=T.div`
   /* width: 462px;
   height: 330px; */
   width: 90%;
@@ -271,6 +270,10 @@ Error generating stack: `+o.message+`
   font-size: 0.75rem;
   color: #83838b;
   margin: 0;
+`,I1=T.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `,Od=T.button`
   border: 1px solid black;
   background-color: ${e=>e.active?"black":"white"};
@@ -286,7 +289,7 @@ Error generating stack: `+o.message+`
   border-radius: 5px;
   width: auto;
   padding: 0 10px;
-`,I1=()=>C.jsxs(O1,{children:[C.jsx(M1,{children:C.jsx(S1,{})}),C.jsx(ss,{children:C.jsx(i1,{})}),C.jsxs(D1,{children:[C.jsx(F1,{children:C.jsx(q0,{})}),C.jsx(A1,{children:C.jsx(_1,{})})]})]}),O1=T.div`
+`,O1=()=>C.jsxs(M1,{children:[C.jsx(D1,{children:C.jsx(S1,{})}),C.jsx(ss,{children:C.jsx(i1,{})}),C.jsxs(F1,{children:[C.jsx(A1,{children:C.jsx(q0,{})}),C.jsx(U1,{children:C.jsx(_1,{})})]})]}),M1=T.div`
   display: grid;
   grid-template-columns: 1.5fr 5fr 4fr;
   grid-template-rows: 1fr;
@@ -304,13 +307,13 @@ Error generating stack: `+o.message+`
   @media (max-width: 768px) {
     grid-row: 2;
   }
-`,M1=T(ss)`
+`,D1=T(ss)`
   background-color: white;
   grid-row: span 3;
   @media (max-width: 768px) {
     grid-row: 1;
   }
-`,D1=T(ss)`
+`,F1=T(ss)`
   background-color: white;
   grid-row: span 3;
   @media (max-width: 768px) {
@@ -318,28 +321,28 @@ Error generating stack: `+o.message+`
   }
   padding-top: 1rem;
   padding-right: 1rem;
-`,F1=T.div`
-  flex: 1;
-  height: 50%;
-  width: 100%;
-  background-color: white;
 `,A1=T.div`
   flex: 1;
+  height: 51.5%;
+  width: 100%;
+  background-color: white;
+`,U1=T.div`
+  flex: 1;
   height: 50%;
   width: 100%;
   background-color: white;
-`,U1=()=>C.jsxs(B1,{children:[C.jsx(W1,{children:"EZPT"}),C.jsxs(V1,{action:"",method:"",autocomplete:"off",children:[C.jsxs(ti,{children:[C.jsx(Va,{children:"ID"}),C.jsx(Ha,{type:"text",name:"id"})]}),C.jsxs(ti,{children:[C.jsx(Va,{children:"Password"}),C.jsx(Ha,{type:"password",name:"password",required:!0})]}),C.jsx(ti,{children:C.jsx(H1,{type:"submit",value:"SignIn"})}),C.jsx(Q1,{children:"Forgot your password?"})]})]}),B1=T.div`
+`,B1=()=>C.jsxs(W1,{children:[C.jsx(V1,{children:"EZPT"}),C.jsxs(H1,{action:"",method:"",autocomplete:"off",children:[C.jsxs(ti,{children:[C.jsx(Va,{children:"ID"}),C.jsx(Ha,{type:"text",name:"id"})]}),C.jsxs(ti,{children:[C.jsx(Va,{children:"Password"}),C.jsx(Ha,{type:"password",name:"password",required:!0})]}),C.jsx(ti,{children:C.jsx(Q1,{type:"submit",value:"SignIn"})}),C.jsx(G1,{children:"Forgot your password?"})]})]}),W1=T.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`,W1=T.h1`
+`,V1=T.h1`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
-`,V1=T.form`
+`,H1=T.form`
   display: flex;
   flex-direction: column;
 `,ti=T.label`
@@ -355,7 +358,7 @@ Error generating stack: `+o.message+`
   background-color: #ffffff;
   border: 2px solid #000000;
   border-radius: 15px;
-`,H1=T.input`
+`,Q1=T.input`
   width: 380px;
   height: 60px;
   background-color: #000000;
@@ -364,10 +367,10 @@ Error generating stack: `+o.message+`
   font-weight: 700;
   border-radius: 15px;
   margin: 60px 0px 0px 0px;
-`,Q1=T.h4`
+`,G1=T.h4`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
-`,G1=()=>C.jsx(C.Fragment,{children:C.jsx(U1,{})}),K1=()=>C.jsxs(Gm,{children:[C.jsx(qi,{path:"/",element:C.jsx(I1,{})}),C.jsx(qi,{path:"/login",element:C.jsx(G1,{})})]});function Y1(){return C.jsx(K1,{})}ni.createRoot(document.getElementById("root")).render(C.jsx(we.StrictMode,{children:C.jsx(Ym,{basename:"/ContractAssistant_FE",children:C.jsx(Y1,{})})}));
+`,K1=()=>C.jsx(C.Fragment,{children:C.jsx(B1,{})}),Y1=()=>C.jsxs(Gm,{children:[C.jsx(qi,{path:"/",element:C.jsx(O1,{})}),C.jsx(qi,{path:"/login",element:C.jsx(K1,{})})]});function X1(){return C.jsx(Y1,{})}ni.createRoot(document.getElementById("root")).render(C.jsx(we.StrictMode,{children:C.jsx(Ym,{basename:"/ContractAssistant_FE",children:C.jsx(X1,{})})}));
