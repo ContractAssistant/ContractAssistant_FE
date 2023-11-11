@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import ChatForm from "../components/ChatForm";
 
 const MainPage = () => {
   return (
     <GridContainer>
       <LeftBar>sidebar</LeftBar>
-      <GridItem>main</GridItem>
+      <GridItem><ChatForm /></GridItem>
       <RightBar>sidebar</RightBar>
     </GridContainer>
   );
@@ -46,4 +47,5 @@ const RightBar = styled(GridItem)`
     grid-row: 3;
   }
 `;
+
 export default MainPage;
