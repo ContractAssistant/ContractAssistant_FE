@@ -66,7 +66,7 @@ const RightBar = styled(GridItem)`
 
 const RightBarTop = styled.div`
   flex: 1;
-  height: 50%;
+  height: 51.5%;
   width: 100%;
   background-color: white;
 `;
