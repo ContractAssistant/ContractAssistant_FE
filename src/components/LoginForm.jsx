@@ -5,6 +5,7 @@ const LoginForm = () => {
     <Wrapper>
       <MainTitle>EZPT</MainTitle>
       <FormWrapper action="" method="" autoComplete="off">
+      <FormWrapper action="" method="" autocomplete="off">
         <LabelWrapper>
           <Title>ID</Title>
           <InputForm type="text" name="id" />
