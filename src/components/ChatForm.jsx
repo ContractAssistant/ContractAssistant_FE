@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   /* width: 476px;
   height: 905px; */
   width: 90%;
-  height: 91.5%;
+  height: 93%;
   border: 1px solid #e4e4e7;
   border-radius: 10px;
   padding: 2rem;
@@ -36,7 +36,7 @@ const MainTitle = styled.h4`
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  height: 95%;
+  height: 98%;
 `;
 
 const LabelWrapper = styled.label`
@@ -59,12 +59,11 @@ const TypeForm = styled.input`
 `;
 
 const InputForm = styled.textarea`
-  /* width: 470px; */
   width: 100%;
   height: 100%;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   resize: none;
 `;
 

@@ -17,32 +17,33 @@ const DUMMY_DATA = [
   {
     id: "3",
     title: "연차&휴가(무급/유급)",
-    content: "2018년 6월 관련 법이 개정되면서 1년 미만 신입사원도 11일의 연차 휴가를 사용할 수 있게 되었습니다.",
+    content:
+      "2018년 6월 관련 법이 개정되면서 1년 미만 신입사원도 11일의 연차 휴가를 사용할 수 있게 되었습니다.",
   },
-  //   {
-  //     id: "4",
-  //     title: "상속",
-  //     content:
-  //       "상속은 죽은 사람으로부터 그의 재산, 채권, 부채 등의 권리와 의무를 그의 법정 상속인에게 이전하는 것을 말합니다. 상속은 법률에 따라 이뤄지며, 상속인은 상속에 따른 재산을 상속인 간 협의 또는 법정 분할에 따라 나눌 수 있습니다.",
-  //   },
-  //   {
-  //     id: "5",
-  //     title: "계약 해지",
-  //     content:
-  //       "계약 해지는 어떤 계약이 정해진 기간 동안 유효하게 유지되지 않거나, 계약의 조건이 어기어졌을 때, 또는 당사자 중 하나가 계약을 위반했을 때 발생합니다. 계약 해지에는 서면 통지, 소송, 또는 양자 합의 등 다양한 방법이 포함될 수 있습니다.",
-  //   },
-  //   {
-  //     id: "6",
-  //     title: "상표권",
-  //     content:
-  //       "상표권은 상표로 등록된 상표의 소유자에게 주어지는 권리를 의미합니다. 이 권리는 특정한 상표를 특정한 상품 또는 서비스에 사용할 수 있는 권리를 제공하며, 상표의 소유자는 다른 사람이 해당 상표를 무단으로 사용하는 것을 막을 수 있습니다.",
-  //   },
+  {
+    id: "4",
+    title: "상속",
+    content:
+      "상속은 죽은 사람으로부터 그의 재산, 채권, 부채 등의 권리와 의무를 그의 법정 상속인에게 이전하는 것을 말합니다. 상속은 법률에 따라 이뤄지며, 상속인은 상속에 따른 재산을 상속인 간 협의 또는 법정 분할에 따라 나눌 수 있습니다.",
+  },
+  {
+    id: "5",
+    title: "계약 해지",
+    content:
+      "계약 해지는 어떤 계약이 정해진 기간 동안 유효하게 유지되지 않거나, 계약의 조건이 어기어졌을 때, 또는 당사자 중 하나가 계약을 위반했을 때 발생합니다. 계약 해지에는 서면 통지, 소송, 또는 양자 합의 등 다양한 방법이 포함될 수 있습니다.",
+  },
+  {
+    id: "6",
+    title: "상표권",
+    content:
+      "상표권은 상표로 등록된 상표의 소유자에게 주어지는 권리를 의미합니다. 이 권리는 특정한 상표를 특정한 상품 또는 서비스에 사용할 수 있는 권리를 제공하며, 상표의 소유자는 다른 사람이 해당 상표를 무단으로 사용하는 것을 막을 수 있습니다.",
+  },
 ];
 
 const LegalTerminology = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentGroup, setCurrentGroup] = useState(0);
-  const wordsPerPage = 1;
+  const wordsPerPage = 3;
 
   const indexOfLastWord = currentPage * wordsPerPage;
   const indexOfFirstWord = indexOfLastWord - wordsPerPage;
@@ -56,7 +57,10 @@ const LegalTerminology = () => {
 
   const groupCount = Math.ceil(pageNumbers.length / 10);
   const firstPageNumber = currentGroup * 10;
-  const currentGroupPageNumbers = pageNumbers.slice(firstPageNumber, firstPageNumber + 10);
+  const currentGroupPageNumbers = pageNumbers.slice(
+    firstPageNumber,
+    firstPageNumber + 10
+  );
 
   return (
     <Wrapper>
@@ -70,13 +74,27 @@ const LegalTerminology = () => {
           </DataItem>
         ))}
       </Content>
-      {currentGroup > 0 && <TextButton onClick={() => setCurrentGroup(currentGroup - 1)}>⬅️</TextButton>}
-      {currentGroupPageNumbers.map((number) => (
-        <PaginationButton key={number} active={number === currentPage} onClick={() => setCurrentPage(number)}>
-          {number}
-        </PaginationButton>
-      ))}
-      {currentGroup < groupCount - 1 && <TextButton onClick={() => setCurrentGroup(currentGroup + 1)}>➡️</TextButton>}
+      <PaginationWrapper>
+        {currentGroup > 0 && (
+          <TextButton onClick={() => setCurrentGroup(currentGroup - 1)}>
+            ⬅️
+          </TextButton>
+        )}
+        {currentGroupPageNumbers.map((number) => (
+          <PaginationButton
+            key={number}
+            active={number === currentPage}
+            onClick={() => setCurrentPage(number)}
+          >
+            {number}
+          </PaginationButton>
+        ))}
+        {currentGroup < groupCount - 1 && (
+          <TextButton onClick={() => setCurrentGroup(currentGroup + 1)}>
+            ➡️
+          </TextButton>
+        )}
+      </PaginationWrapper>
     </Wrapper>
   );
 };
@@ -132,6 +150,12 @@ const DataContent = styled.p`
   font-size: 0.75rem;
   color: #83838b;
   margin: 0;
+`;
+
+const PaginationWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const PaginationButton = styled.button`
