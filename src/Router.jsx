@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import MainPage from "./page/MainPage";
-import LoginPage from "./page/LoginPage";
+import Main from "./page/MainPage";
+import Login from "./page/login";
+import GptPage from "./page/GptPage";
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Main />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/gpt" element={<GptPage />} />
     </Routes>
   );
 };
