@@ -4,7 +4,7 @@ const LoginForm = () => {
   return (
     <Wrapper>
       <MainTitle>EZPT</MainTitle>
-      <FormWrapper action="" method="" autocomplete="off">
+      <FormWrapper action="" method="" autoComplete="off">
         <LabelWrapper>
           <Title>ID</Title>
           <InputForm type="text" name="id" />

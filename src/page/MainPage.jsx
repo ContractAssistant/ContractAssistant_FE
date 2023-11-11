@@ -1,5 +1,13 @@
+import ChatForm from "../components/ChatForm";
+
 const MainPage = () => {
-  return <>Main</>;
+  return (
+    <>
+      <ChatForm />
+    </>
+  );
 };
+
+
 
 export default MainPage;
