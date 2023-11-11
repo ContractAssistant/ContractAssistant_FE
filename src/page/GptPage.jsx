@@ -3,7 +3,7 @@ import { OpenAIApi, Configuration } from "openai";
 
 const KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
-const GptPage = () => {
+const GptPage= () => {
   const configuration = new Configuration({
     apiKey: KEY,
   });
@@ -11,46 +11,46 @@ const GptPage = () => {
   const openai = new OpenAIApi(configuration);
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
-  const [response, setResponse] = useState({ 
-    expression: "",
-    caution: "",
-    legalTerms: ""
-  });
+  const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const firstSubmit = async () => {
+    setLoading(true);
+
+    const prompt1 =
+      "계약서 종류는" +
+      `${input1}` +
+      "이다. 다음 내용은 계약서 내용이다." +
+      "다음은 계약서 항목에 대한 해석, 해당 항목의 유의사항, 법률 용어에 대해서 정보를 제공하는 예시이다. [표현해석] : 1년의 의무기간을 채우지 못하고 중도 퇴사하는 경우, 100만원을 배상하여야 한다. 항목 해석: 1년을 못 채우고 퇴사하는 경우, 저는 회사에 100만원을 배상해야 한다. [유의사항] : 근로기준법은 손해배상액을 미리 정해두는 것을 금지하고 있다. 아무리 근로계약서에 서명했더라도 근로기준법에 위반된 조항은 효력이 없다.[법률용어] : 근로기준법, 손해배상액, 근로계약서";
+
+    try {
+      await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: prompt1,
+        temperature: 0.5,
+        max_tokens: 1000,
+      });
+    } catch (e) {
+      console.error("Error:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const promptValue =
-      "계약서 종류는" +
-      `${input1}` +
-      "이다. 다음 내용은 계약서 내용이다." +
-      `${input2}` +
-      "위의 내용을 다음 조건 반드시을 만족하여 분석하려 한다.[조건] 1. 각 항목에 대해서 정확한 용어 문법 및 표현에 대해서 해석할 것 2. 각 항목에 대해서 부적합하거나 모호한 표현이 있는지 려주고 각 항목에 대하여 어떤점을 주의해야하는지 알려줄것(예시 : 항목번호: 제 2조 표현이 모호하게 느껴질 수 있습니다. 어떤 기준으로 '갑'의 업무형평이 결정되고 변경될지 명시되지 않았습니다.) 3. 계약서 내용중 법률 단어는 리스트 형태로 단어만 출력해줄것 4. 모든 문장끝에는 줄바꿈 할것 5. 표현해석에서 각 항목의 해석내용이 출력된후에 세미클론(;)을 추가하여 각 항목에대핸 해석을 구분할 수 있도록 할것 6. 주의사항에서 각 항목의 주의사유가 출력된후에만 세미클론(;)을 추가하여 각 항목에대핸 해석을 구분할 수 있도록 할것"
-      +"다음은 출력 양식이다. 반드시 준수하여 출력해라. 출력양식 [표현해석] 항목번호 : 해석내용: [주의사항] 항목번호: 해당내용: 주의사유: [법률단어]";
-
+    const prompt2 = `${input2}` + "이 항목을 위의 예시처럼 분석해서 반드시 다음과 같은 형식으로 출력해줘."
+    +"[표현해석] : {항목 분석내용}, [유의사항] : {모호하거나 주의가 필요한 문장 해석}, [법률용어] : {뜻 없이 단어만 리스트 형태로}";
     try {
       const result = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: promptValue,
+        prompt: prompt2,
         temperature: 0.5,
-        max_tokens: 2000,
+        max_tokens: 1000,
       });
-
-      const choices = result.data.choices[0].text;
-
-      console.log(choices);
-      const expression = choices.split("[표현해석]")[1].split("[주의사항]")[0].trim();
-      const caution = choices.split("[주의사항]")[1].split("[법률단어]")[0].trim();
-      const legalTerms = choices.split("[법률단어]").pop().trim();
-
-      setResponse({
-        expression,
-        caution,
-        legalTerms
-      });
-
+      setResponse(result.data.choices[0].text);
     } catch (e) {
       console.error("Error:", e);
     } finally {
@@ -59,9 +59,9 @@ const GptPage = () => {
   };
 
   useEffect(() => {
-    setInput1("");
-    setInput2("");
-  }, [response]);
+    // 처음 렌더링 시 firstSubmit 호출
+    firstSubmit();
+  }, []);
 
   return (
     <div className="all">
@@ -93,11 +93,8 @@ const GptPage = () => {
         </form>
         <div className="answer">
           <div className="answerlist">
-            <strong>Expression:</strong> {response.expression}
+            <strong>Response:</strong> {response}
             <br />
-            <strong>Caution:</strong> {response.caution}
-            <br />
-            <strong>Legal Terms:</strong> {response.legalTerms}
           </div>
         </div>
       </div>
