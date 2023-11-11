@@ -42,7 +42,7 @@ const GptPage= () => {
     setLoading(true);
 
     const prompt2 = `${input2}` + "이 항목을 위의 예시처럼 분석해서 반드시 다음과 같은 형식으로 출력해줘."
-    +"[표현해석] : {항목 분석내용}, [유의사항] : {모호하거나 주의가 필요한 문장 해석}, [법률용어] : {뜻 없이 단어만 리스트 형태로}";
+    +"[표현해석] : {항목 분석내용}, [유의사항] : {모호하거나 주의가 필요한 문장알려주고 이유도 설명}, [법률용어] : {뜻 없이 단어만 리스트 형태로}";
     try {
       const result = await openai.createCompletion({
         model: "text-davinci-003",
