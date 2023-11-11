@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Main from "./page/MainPage";
-import Login from "./page/login";
+import Login from "./page/LoginPage";
 import GptPage from "./page/GptPage";
 
 const Router = () => {

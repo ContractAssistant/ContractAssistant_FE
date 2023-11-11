@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { OpenAIApi, Configuration } from "openai";
+import MinWageCal from "../components/MinWageCal";
 
 const KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
@@ -96,6 +97,7 @@ const GptPage= () => {
             <strong>Response:</strong> {response}
             <br />
           </div>
+          <MinWageCal>최저임금 계산기</MinWageCal>
         </div>
       </div>
     </div>
