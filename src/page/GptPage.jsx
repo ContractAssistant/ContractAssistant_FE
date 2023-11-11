@@ -27,23 +27,23 @@ const GptPage = () => {
       `${input1}` +
       "이다. 다음 내용은 계약서 내용이다." +
       `${input2}` +
-      "위의 내용을 다음 조건을 만족하여 분석하려 한다.[조건] 1. 각 항목에 대해서 정확한 용어 문법 및 표현에 대해서 해석할 것 2. 각 항목에 대해서 부적합하거나 모호한 표현이 있는지 려줄 것 3. 모호한 표현은 왜 주의해야하는지 알려줄것 4. 계약서 내용중 법률 단어는 리스트 형태로 단어만 출력해줄것"
-      +"출력양식 [표현 해석] 항목번호 : 해석내용: \n[주의사항] 항목번호: 해당내용: 주의사유: \n[법률 단어]";
+      "위의 내용을 다음 조건 반드시을 만족하여 분석하려 한다.[조건] 1. 각 항목에 대해서 정확한 용어 문법 및 표현에 대해서 해석할 것 2. 각 항목에 대해서 부적합하거나 모호한 표현이 있는지 려주고 각 항목에 대하여 어떤점을 주의해야하는지 알려줄것 3. 계약서 내용중 법률 단어는 리스트 형태로 단어만 출력해줄것 4. 모든 문장끝에는 줄바꿈 할것 5. 표현해석에서 각 항목의 해석내용이 출력된후에 세미클론(;)을 추가하여 각 항목에대핸 해석을 구분할 수 있도록 할것 6. 주의사항에서 각 항목의 주의사유가 출력된후에만 세미클론(;)을 추가하여 각 항목에대핸 해석을 구분할 수 있도록 할것"
+      +"다음은 출력 양식이다. 반드시 준수하여 출력해라. 출력양식 [표현해석] 항목번호 : 해석내용: [주의사항] 항목번호: 해당내용: 주의사유: [법률단어]";
 
     try {
       const result = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: promptValue,
-        temperature: 0.7,
-        max_tokens: 2000,
+        temperature: 0.5,
+        max_tokens: 4000,
       });
 
       const choices = result.data.choices[0].text;
 
       console.log(choices);
-      const expression = choices.split("[주의사항]")[0].trim();
-      const caution = choices.split("[주의사항]")[1].split("[법률 단어]")[0].trim();
-      const legalTerms = choices.split("[법률 단어]").pop().trim();
+      const expression = choices.split("[표현해석]")[1].split("[주의사항]")[0].trim();
+      const caution = choices.split("[주의사항]")[1].split("[법률단어]")[0].trim();
+      const legalTerms = choices.split("[법률단어]").pop().trim();
 
       setResponse({
         expression,
