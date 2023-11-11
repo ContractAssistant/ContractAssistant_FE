@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import GptAnalytics from "../components/GptAnalytics";
 import ChatForm from "../components/ChatForm";
+import ListBar from "../components/ListBar";
 
 const MainPage = () => {
   return (
     <GridContainer>
-      <LeftBar>sidebar</LeftBar>
+      <LeftBar>
+        <ListBar />
+      </LeftBar>
       <GridItem>
         <ChatForm />
       </GridItem>
