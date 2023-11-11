@@ -5,14 +5,17 @@ const MainPage = () => {
     <GridContainer>
       <LeftBar>sidebar</LeftBar>
       <GridItem>main</GridItem>
-      <RightBar>sidebar</RightBar>
+      <RightBar>
+        <RightBarTop>Top</RightBarTop>
+        <RightBarBottom>Bottom</RightBarBottom>
+      </RightBar>
     </GridContainer>
   );
 };
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 2fr 6fr 2fr;
+  grid-template-columns: 2fr 4fr 3fr;
   grid-template-rows: 1fr;
   width: 100vw;
   height: 100vh;
@@ -45,5 +48,17 @@ const RightBar = styled(GridItem)`
   @media (max-width: 768px) {
     grid-row: 3;
   }
+`;
+
+const RightBarTop = styled.div`
+  flex: 1;
+  height: 50%;
+  background-color: lightblue;
+`;
+
+const RightBarBottom = styled.div`
+  flex: 1;
+  height: 50%;
+  background-color: lightgreen;
 `;
 export default MainPage;
