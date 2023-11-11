@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import GptAnalytics from "../components/GptAnalytics";
 import ChatForm from "../components/ChatForm";
+import GptAnalytics from "../components/GptAnalytics";
 
 const MainPage = () => {
   return (
