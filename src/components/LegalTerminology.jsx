@@ -109,8 +109,10 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  width: 476px;
-  height: 230px;
+  /* width: 476px;
+  width: 100%;
+  height: 230px; */
+  height: 70%;
   overflow: hidden;
 `;
 
