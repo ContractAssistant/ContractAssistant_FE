@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import useStoreGptData from "../store/useStoreGptData";
 
 const DUMMY_DATA = [
   {
@@ -17,8 +18,7 @@ const DUMMY_DATA = [
   {
     id: "3",
     title: "연차&휴가(무급/유급)",
-    content:
-      "2018년 6월 관련 법이 개정되면서 1년 미만 신입사원도 11일의 연차 휴가를 사용할 수 있게 되었습니다.",
+    content: "2018년 6월 관련 법이 개정되면서 1년 미만 신입사원도 11일의 연차 휴가를 사용할 수 있게 되었습니다.",
   },
   {
     id: "4",
@@ -45,6 +45,8 @@ const LegalTerminology = () => {
   const [currentGroup, setCurrentGroup] = useState(0);
   const wordsPerPage = 3;
 
+  const { terminologyData: terminology } = useStoreGptData();
+
   const indexOfLastWord = currentPage * wordsPerPage;
   const indexOfFirstWord = indexOfLastWord - wordsPerPage;
 
@@ -57,43 +59,33 @@ const LegalTerminology = () => {
 
   const groupCount = Math.ceil(pageNumbers.length / 10);
   const firstPageNumber = currentGroup * 10;
-  const currentGroupPageNumbers = pageNumbers.slice(
-    firstPageNumber,
-    firstPageNumber + 10
-  );
+  const currentGroupPageNumbers = pageNumbers.slice(firstPageNumber, firstPageNumber + 10);
 
   return (
     <Wrapper>
       <MainTitle>Legal Terminology</MainTitle>
       <SubTitle>법률 용어 해석</SubTitle>
       <Content>
-        {currentData.map((data) => (
+        {/* {currentData.map((data) => (
           <DataItem key={data.id}>
             <DataTitle>{data.title}</DataTitle>
             <DataContent>{data.content}</DataContent>
           </DataItem>
+        ))} */}
+        {terminology.map((data, index) => (
+          <DataItem key={index}>
+            <DataTitle>{data}</DataTitle>
+          </DataItem>
         ))}
       </Content>
       <PaginationWrapper>
-        {currentGroup > 0 && (
-          <TextButton onClick={() => setCurrentGroup(currentGroup - 1)}>
-            ⬅️
-          </TextButton>
-        )}
+        {currentGroup > 0 && <TextButton onClick={() => setCurrentGroup(currentGroup - 1)}>⬅️</TextButton>}
         {currentGroupPageNumbers.map((number) => (
-          <PaginationButton
-            key={number}
-            active={number === currentPage}
-            onClick={() => setCurrentPage(number)}
-          >
+          <PaginationButton key={number} active={number === currentPage} onClick={() => setCurrentPage(number)}>
             {number}
           </PaginationButton>
         ))}
-        {currentGroup < groupCount - 1 && (
-          <TextButton onClick={() => setCurrentGroup(currentGroup + 1)}>
-            ➡️
-          </TextButton>
-        )}
+        {currentGroup < groupCount - 1 && <TextButton onClick={() => setCurrentGroup(currentGroup + 1)}>➡️</TextButton>}
       </PaginationWrapper>
     </Wrapper>
   );

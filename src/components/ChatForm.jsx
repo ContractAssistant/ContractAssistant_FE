@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { OpenAIApi, Configuration } from "openai";
+import useStoreGptData from "../store/useStoreGptData";
 
 const KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
@@ -11,6 +12,7 @@ const ChatForm = () => {
   const [expression, setExpression] = useState([]);
   const [caution, setCaution] = useState([]);
   const [terminology, setTerminology] = useState([]);
+  const { setTerminologyData, setExpressionData, setCautionData } = useStoreGptData();
   const configuration = new Configuration({
     apiKey: KEY,
   });
@@ -49,10 +51,12 @@ const ChatForm = () => {
         if (item.includes("표현해석")) {
           let temp = item.replace("표현해석: ", "");
           setExpression([...expression, temp]);
+          setExpressionData(expression);
         } else if (item.includes("유의사항")) {
           // data.유의사항.push(item.replace("유의사항: ", ""));
           let temp = item.replace("유의사항: ", "");
           setCaution([...caution, temp]);
+          setCautionData(caution);
         } else if (item.includes("법률용어")) {
           // data.법률용어.push(item.replace("법률용어: ", ""));
           let temp = item.replace("법률용어: ", "");
@@ -60,6 +64,7 @@ const ChatForm = () => {
           temp.map((x) => {
             setTerminology([...terminology, x]);
           });
+          setTerminologyData(terminology);
         }
       });
       console.log(expression);
