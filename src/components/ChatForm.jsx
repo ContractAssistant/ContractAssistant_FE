@@ -43,33 +43,32 @@ const ChatForm = () => {
         temperature: 0.5,
         max_tokens: 1000,
       });
-      console.log(result);
       const lines = result.data.choices[0].text.split("\n");
-      console.log("lines: ", lines);
 
       lines.forEach((item) => {
-        if (item.includes("표현해석")) {
+        if (item.includes("표현해석: ")) {
           let temp = item.replace("표현해석: ", "");
-          setExpression([...expression, temp]);
-          setExpressionData(expression);
-        } else if (item.includes("유의사항")) {
+          let newExpression = [...expression, temp];
+          setExpression(newExpression);
+          setExpressionData(newExpression);
+        } else if (item.includes("유의사항: ")) {
           // data.유의사항.push(item.replace("유의사항: ", ""));
           let temp = item.replace("유의사항: ", "");
-          setCaution([...caution, temp]);
-          setCautionData(caution);
-        } else if (item.includes("법률용어")) {
-          // data.법률용어.push(item.replace("법률용어: ", ""));
+          let newCaution = [...caution, temp];
+          setCaution(newCaution);
+          setCautionData(newCaution);
+        } else if (item.includes("법률용어: ")) {
           let temp = item.replace("법률용어: ", "");
           temp = temp.split(",");
+          let newTerminology = [...terminology];
           temp.map((x) => {
-            setTerminology([...terminology, x]);
+            let word = x.trim();
+            newTerminology.push(word);
           });
-          setTerminologyData(terminology);
+          setTerminology(newTerminology);
+          setTerminologyData(newTerminology);
         }
       });
-      console.log(expression);
-      console.log(caution);
-      console.log(terminology);
     } catch (e) {
       console.error("Error:", e);
     } finally {
@@ -184,6 +183,7 @@ const TypeForm = styled.input`
 const ChatResult = styled.div`
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
+  max-height: 60%;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
   margin-bottom: 18px;
