@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+
+  const onClickHome = () => {
+    navigate("/home");
+  }
+
   return (
     <Wrapper>
       <MainTitle>EZPT</MainTitle>
@@ -14,7 +21,7 @@ const LoginForm = () => {
           <InputForm type="password" name="password" required />
         </LabelWrapper>
         <LabelWrapper>
-          <LoginBtn type="submit" value="SignIn" />
+          <LoginBtn type="submit" value="SignIn" onClick={onClickHome}/>
         </LabelWrapper>
         <SmallTitle>Forgot your password?</SmallTitle>
       </FormWrapper>

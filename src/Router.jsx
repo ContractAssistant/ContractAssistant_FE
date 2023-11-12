@@ -6,8 +6,8 @@ import LoginPage from "./page/LoginPage";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/home" element={<Main />} />
+      <Route path="/" element={<LoginPage />} />
       <Route path="/gpt" element={<GptPage />} />
     </Routes>
   );
