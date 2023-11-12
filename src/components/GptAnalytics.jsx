@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useStoreGptData from "../store/useStoreGptData";
 
 const gptData = [
   {
@@ -30,22 +31,23 @@ const gptData = [
 ];
 
 const GptAnalytics = () => {
+  // // 표현해석 추출
+  // const expression = gptData.map((data) => data.expression.trim());
 
-  // 표현해석 추출
-  const expression = gptData.map((data) => data.expression.trim());
+  // // 주의사항 추출
+  // let caution = gptData.map((data) => data.caution.trim());
+  // caution = caution.toString().split("\n");
+  // console.log("caution", caution);
 
-  // 주의사항 추출
-  let caution = gptData.map((data) => data.caution.trim());
-  caution = caution.toString().split("\n");
-  console.log("caution", caution);
+  // // 법률 단어 추출
+  // const legalTerms = gptData.map((data) => data.legalterm.trim());
 
-  // 법률 단어 추출
-  const legalTerms = gptData.map((data) => data.legalterm.trim());
-
+  const { expressionData: expression, cautionData: caution, terminologyData: terminology } = useStoreGptData();
   // 결과 출력
   console.log("표현해석:", expression);
   console.log("주의사항:", caution);
-  console.log("법률 단어:", legalTerms);
+  console.log("법률 단어:", terminology);
+
   return (
     <Wrapper>
       <Header>
@@ -56,18 +58,9 @@ const GptAnalytics = () => {
       </Header>
 
       <AnalyticsContent>
-        {/* {gptData.map((word, index) => (
-          <ContentWrapper key={index}>
-            <AnalyticsTitle key={word}>{index + 1}</AnalyticsTitle>
-            <AnalyticsTitle key={word}>{word.title}</AnalyticsTitle>
-            <AnalyticsTitle key={word}>{word.content}</AnalyticsTitle>
-          </ContentWrapper>
-        ))} */}
-
         <ContentWrapper>
-          {caution.map((word, index) => (
-            <AnalyticsTitle key={index}>{word}</AnalyticsTitle>
-          ))}
+          {expression && expression.map((word, index) => <AnalyticsTitle key={index}>{word}</AnalyticsTitle>)}
+          {caution && caution.map((word, index) => <AnalyticsTitle key={index}>{word}</AnalyticsTitle>)}
         </ContentWrapper>
       </AnalyticsContent>
     </Wrapper>
@@ -127,7 +120,7 @@ const SubTitle = styled.p`
 
 const AnalyticsTitle = styled.p`
   padding: 0;
-  margin: 0;
+  margin-bottom: 1rem;
   color: #000;
   font-family: Pretendard;
   font-size: 14px;
