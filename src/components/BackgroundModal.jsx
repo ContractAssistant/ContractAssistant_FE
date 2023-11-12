@@ -4,16 +4,16 @@ import styled from "styled-components";
 const BackgroundModal = ({ children, onClick }) => {
   const { setShowModal } = useModalStore();
 
-  const closeModal = () => {
-    if (onClick) {
-      onClick();
-    } else {
-      setShowModal(false);
-    }
-  };
+  //   const closeModal = () => {
+  //     if (onClick) {
+  //       onClick();
+  //     } else {
+  //       setShowModal(false);
+  //     }
+  //   };
 
   return (
-    <BackgroundWrapper onClick={closeModal}>
+    <BackgroundWrapper>
       <div>{children}</div>
     </BackgroundWrapper>
   );
