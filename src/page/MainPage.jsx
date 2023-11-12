@@ -3,10 +3,20 @@ import GptAnalytics from "../components/GptAnalytics";
 import ChatForm from "../components/ChatForm";
 import ListBar from "../components/ListBar";
 import LegalTerminology from "../components/LegalTerminology";
+import useModalStore from "../store/useModalStore";
+import { useEffect, Suspense } from "react";
+import MinWageCal from "../components/MinWageCal";
 
 const MainPage = () => {
+  const modalTable = { MinWageCal: <MinWageCal /> };
+  const { setShowModal, showModal, modalType } = useModalStore();
+  const component = modalType ? modalTable[modalType] : null;
+  useEffect(() => {
+    setShowModal(false);
+  }, []);
   return (
     <GridContainer>
+      {showModal && <Suspense fallback={null}>{component}</Suspense>}
       <LeftBar>
         <ListBar />
       </LeftBar>
