@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import {
-  IoIosChatbubbles,
-  IoIosInformationCircle,
-  IoIosAddCircle,
-} from "react-icons/io";
+import { IoIosChatbubbles, IoIosInformationCircle, IoIosAddCircle } from "react-icons/io";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { useState } from "react";
+import useModalStore from "../store/useModalStore";
 
 const ListBar = () => {
   const [chatList, setChatList] = useState(["Sample"]);
@@ -13,6 +10,12 @@ const ListBar = () => {
   const addNewChat = () => {
     const newList = [...chatList, `Sample ${chatList.length + 1}`];
     setChatList(newList);
+  };
+
+  const { setModalType, setShowModal } = useModalStore();
+  const handleShowLoginModal = () => {
+    setModalType("MinWageCal");
+    setShowModal(true);
   };
 
   return (
@@ -36,9 +39,9 @@ const ListBar = () => {
         <AiFillQuestionCircle size="20" color="#000000" />
         <MainTitle>For Help?</MainTitle>
       </Box>
-      <Box>
+      <Box onClick={() => handleShowLoginModal()}>
         <IoIosInformationCircle size="20" color="#000000" />
-        <MainTitle>Guide</MainTitle>
+        <MainTitle>MinWage Calculator</MainTitle>
       </Box>
     </Wrapper>
   );
@@ -60,6 +63,7 @@ const Box = styled.div`
   padding: 20px 0px 20px 20px;
   border-top: 1px solid #e4e4e7;
   border-bottom: 1px solid #e4e4e7;
+  cursor: pointer;
 `;
 
 const AddBox = styled.div`
