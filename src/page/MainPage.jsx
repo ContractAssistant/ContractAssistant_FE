@@ -4,11 +4,12 @@ import ChatForm from "../components/ChatForm";
 import ListBar from "../components/ListBar";
 import LegalTerminology from "../components/LegalTerminology";
 import useModalStore from "../store/useModalStore";
-import { useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import MinWageCal from "../components/MinWageCal";
 
 const MainPage = () => {
   const modalTable = { MinWageCal: <MinWageCal /> };
+  const [activeChatIndex, setActiveChatIndex] = useState(<ChatForm />);
   const { setShowModal, showModal, modalType } = useModalStore();
   const component = modalType ? modalTable[modalType] : null;
   useEffect(() => {
@@ -18,10 +19,10 @@ const MainPage = () => {
     <GridContainer>
       {showModal && <Suspense fallback={null}>{component}</Suspense>}
       <LeftBar>
-        <ListBar />
+        <ListBar  onChatClick={setActiveChatIndex}/>
       </LeftBar>
       <GridItem>
-        <ChatForm />
+        {activeChatIndex !== null && <ChatForm key={activeChatIndex} chatIndex={activeChatIndex} />}
       </GridItem>
       <RightBar>
         <RightBarTop>
