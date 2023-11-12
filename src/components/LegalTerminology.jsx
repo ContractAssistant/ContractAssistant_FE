@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useStoreGptData from "../store/useStoreGptData";
+import axios from "axios";
+import words from "./words";
 
 const DUMMY_DATA = [
   {
@@ -43,24 +45,42 @@ const DUMMY_DATA = [
 const LegalTerminology = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentGroup, setCurrentGroup] = useState(0);
-  const wordsPerPage = 3;
+  const wordsPerPage = 4;
 
   const { terminologyData: terminology } = useStoreGptData();
 
   const indexOfLastWord = currentPage * wordsPerPage;
   const indexOfFirstWord = indexOfLastWord - wordsPerPage;
 
-  const currentData = DUMMY_DATA.slice(indexOfFirstWord, indexOfLastWord);
+  const currentData = terminology.slice(indexOfFirstWord, indexOfLastWord);
   // 페이지 번호를 생성합니다.
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(DUMMY_DATA.length / wordsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(terminology.length / wordsPerPage); i++) {
     pageNumbers.push(i);
   }
 
   const groupCount = Math.ceil(pageNumbers.length / 10);
   const firstPageNumber = currentGroup * 10;
   const currentGroupPageNumbers = pageNumbers.slice(firstPageNumber, firstPageNumber + 10);
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://15.165.159.196:8081/term/all");
+        setData(response.data);
+      } catch (error) {
+        console.error("데이터를 불러오는데 실패했습니다.", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const wordsObject = data.reduce((obj, word) => {
+    obj[word.word] = word.meaning;
+    return obj;
+  }, {});
   return (
     <Wrapper>
       <MainTitle>Legal Terminology</MainTitle>
@@ -72,11 +92,16 @@ const LegalTerminology = () => {
             <DataContent>{data.content}</DataContent>
           </DataItem>
         ))} */}
-        {terminology.map((data, index) => (
-          <DataItem key={index}>
-            <DataTitle>{data}</DataTitle>
-          </DataItem>
-        ))}
+        {currentData.map((data, index) => {
+          const content = wordsObject[data.replace(/\(.*\)|\.$/g, "").trim()];
+          return (
+            <DataItem key={index}>
+              <DataTitle>{data}</DataTitle>
+              {content && <DataContent>{content}</DataContent>}
+              {!content && <DataContent>해당 단어는 공공데이터 데이터베이스에서 제공하지 않는 단어 입니다!</DataContent>}
+            </DataItem>
+          );
+        })}
       </Content>
       <PaginationWrapper>
         {currentGroup > 0 && <TextButton onClick={() => setCurrentGroup(currentGroup - 1)}>⬅️</TextButton>}
@@ -135,7 +160,7 @@ const DataItem = styled.div`
 const DataTitle = styled.span`
   font-size: 0.875rem;
   font-weight: 700;
-  margin: 0;
+  margin-bottom: 0.2rem;
 `;
 
 const DataContent = styled.p`
