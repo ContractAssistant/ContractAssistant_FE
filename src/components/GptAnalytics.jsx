@@ -59,8 +59,10 @@ const GptAnalytics = () => {
 
       <AnalyticsContent>
         <ContentWrapper>
-          {expression && expression.map((word, index) => <AnalyticsTitle key={index}>{word}</AnalyticsTitle>)}
-          {caution && caution.map((word, index) => <AnalyticsTitle key={index}>{word}</AnalyticsTitle>)}
+          <ExpreessionTitle>표현해석</ExpreessionTitle>
+          {expression && expression.map((word, index) => <AnalyticsSource key={index}>{word}</AnalyticsSource>)}
+          <AnalyticsTitle>유의사항</AnalyticsTitle>
+          {caution && caution.map((word, index) => <AnalyticsSource key={index}>{word}</AnalyticsSource>)}
         </ContentWrapper>
       </AnalyticsContent>
     </Wrapper>
@@ -119,6 +121,28 @@ const SubTitle = styled.p`
 `;
 
 const AnalyticsTitle = styled.p`
+  padding: 0;
+  margin-bottom: 1rem;
+  color: #ff0000;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+const ExpreessionTitle = styled.p`
+  padding: 0;
+  margin-bottom: 1rem;
+  color: #000;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+const AnalyticsSource = styled.p`
   padding: 0;
   margin-bottom: 1rem;
   color: #000;

@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useStoreGptData from "../store/useStoreGptData";
+import axios from "axios";
+import words from "./words";
 
 const DUMMY_DATA = [
   {
@@ -60,7 +62,29 @@ const LegalTerminology = () => {
   const groupCount = Math.ceil(pageNumbers.length / 10);
   const firstPageNumber = currentGroup * 10;
   const currentGroupPageNumbers = pageNumbers.slice(firstPageNumber, firstPageNumber + 10);
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://15.165.159.196:8081/term/all");
+        setData(response.data);
+        console.log(response);
+      } catch (error) {
+        console.error("데이터를 불러오는데 실패했습니다.", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data);
+  const wordsObject = words.reduce((obj, word) => {
+    obj[word.word] = word.meaning;
+    return obj;
+  }, {});
+  console.log(wordsObject);
+  console.log(wordsObject["인센티브"]);
   return (
     <Wrapper>
       <MainTitle>Legal Terminology</MainTitle>
@@ -72,11 +96,16 @@ const LegalTerminology = () => {
             <DataContent>{data.content}</DataContent>
           </DataItem>
         ))} */}
-        {terminology.map((data, index) => (
-          <DataItem key={index}>
-            <DataTitle>{data}</DataTitle>
-          </DataItem>
-        ))}
+        {terminology.map((data, index) => {
+          const content = wordsObject[data.trim()];
+          console.log(content);
+          return (
+            <DataItem key={index}>
+              <DataTitle>{data}</DataTitle>
+              {content && <DataContent>{content}</DataContent>}
+            </DataItem>
+          );
+        })}
       </Content>
       <PaginationWrapper>
         {currentGroup > 0 && <TextButton onClick={() => setCurrentGroup(currentGroup - 1)}>⬅️</TextButton>}
