@@ -7,11 +7,10 @@ const KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const ChatForm = () => {
   const [inputContent, setInputContent] = useState("");
   const [chatContents, setChatContents] = useState([]);
-  let data = {
-    표현해석: ["표현해석"],
-    유의사항: ["유의사항"],
-    법률용어: ["법률용어"],
-  };
+  // expression, caution, terminology
+  const [expression, setExpression] = useState([]);
+  const [caution, setCaution] = useState([]);
+  const [terminology, setTerminology] = useState([]);
   const configuration = new Configuration({
     apiKey: KEY,
   });
@@ -19,7 +18,6 @@ const ChatForm = () => {
   const openai = new OpenAIApi(configuration);
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
-  const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     setInputContent(e.target.value);
@@ -44,22 +42,29 @@ const ChatForm = () => {
         max_tokens: 1000,
       });
       console.log(result);
-      setResponse(result.data.choices[0].text);
-      console.log(response);
-      console.log(response);
       const lines = result.data.choices[0].text.split("\n");
       console.log("lines: ", lines);
 
       lines.forEach((item) => {
         if (item.includes("표현해석")) {
-          data.표현해석.push(item.replace("표현해석: ", ""));
+          let temp = item.replace("표현해석: ", "");
+          setExpression([...expression, temp]);
         } else if (item.includes("유의사항")) {
-          data.유의사항.push(item.replace("유의사항: ", ""));
+          // data.유의사항.push(item.replace("유의사항: ", ""));
+          let temp = item.replace("유의사항: ", "");
+          setCaution([...caution, temp]);
         } else if (item.includes("법률용어")) {
-          data.법률용어.push(item.replace("법률용어: ", ""));
+          // data.법률용어.push(item.replace("법률용어: ", ""));
+          let temp = item.replace("법률용어: ", "");
+          temp = temp.split(",");
+          temp.map((x) => {
+            setTerminology([...terminology, x]);
+          });
         }
       });
-      console.log(data);
+      console.log(expression);
+      console.log(caution);
+      console.log(terminology);
     } catch (e) {
       console.error("Error:", e);
     } finally {
@@ -74,7 +79,7 @@ const ChatForm = () => {
       "계약서 종류는" +
       `${input1}` +
       "이다. 다음 내용은 계약서 내용이다." +
-      "다음은 계약서 항목에 대한 해석, 해당 항목의 유의사항, 법률 용어에 대해서 정보를 제공하는 예시이다. [표현해석] : 1년의 의무기간을 채우지 못하고 중도 퇴사하는 경우, 100만원을 배상하여야 한다. 항목 해석: 1년을 못 채우고 퇴사하는 경우, 저는 회사에 100만원을 배상해야 한다. [유의사항] : 근로기준법은 손해배상액을 미리 정해두는 것을 금지하고 있다. 아무리 근로계약서에 서명했더라도 근로기준법에 위반된 조항은 효력이 없다.[법률용어] : 근로기준법, 손해배상액, 근로계약서";
+      "다음은 계약서 항목에 대한 해석, 해당 항목의 유의사항, 법률 용어에 대해서 정보를 제공하는 예시이다. 표현해석 : 1년의 의무기간을 채우지 못하고 중도 퇴사하는 경우, 100만원을 배상하여야 한다. 항목 해석: 1년을 못 채우고 퇴사하는 경우, 저는 회사에 100만원을 배상해야 한다. 유의사항 : 근로기준법은 손해배상액을 미리 정해두는 것을 금지하고 있다. 아무리 근로계약서에 서명했더라도 근로기준법에 위반된 조항은 효력이 없다.법률용어 : 근로기준법, 손해배상액, 근로계약서";
 
     try {
       await openai.createCompletion({
