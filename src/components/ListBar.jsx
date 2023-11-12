@@ -3,13 +3,20 @@ import { IoIosChatbubbles, IoIosInformationCircle, IoIosAddCircle } from "react-
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { useState } from "react";
 import useModalStore from "../store/useModalStore";
+// import axios from "axios";
 
-const ListBar = () => {
-  const [chatList, setChatList] = useState(["Sample"]);
+const ListBar = ({ onChatClick }) => {
+  const [chatList, setChatList] = useState(["근로계약서", "임대차계약서", "대출계약서", "기타계약서"]);
+
 
   const addNewChat = () => {
-    const newList = [...chatList, `Sample ${chatList.length + 1}`];
+    const newList = [...chatList, `계약서 ${chatList.length + 1}`];
     setChatList(newList);
+  };
+
+  const handleChatClick = (index) => {
+    onChatClick(index);
+
   };
 
   const { setModalType, setShowModal } = useModalStore();
@@ -30,7 +37,7 @@ const ListBar = () => {
           <IoIosAddCircle size="20" color="#000000" />
         </AddBox>
         {chatList.map((chat, index) => (
-          <ChatBox key={index}>
+          <ChatBox key={index} onClick={() => handleChatClick(index)}>
             <MainTitle>{chat}</MainTitle>
           </ChatBox>
         ))}
